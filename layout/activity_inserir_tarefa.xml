@@ -150,7 +150,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSalvar"
+            android:id="@+id/btnAdicionar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"

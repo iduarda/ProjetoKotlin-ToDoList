@@ -5,49 +5,55 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class ConexaoDB(context: Context) : SQLiteOpenHelper(context, "PessoaDB", null, 1) {
+class ConexaoDB(context: Context) : SQLiteOpenHelper(context, "TarefaDB", null, 1) {
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE Pessoa(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, idade INTEGER)")
+        db.execSQL("CREATE TABLE Tarefa(id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, descricao TEXT, prioridade TEXT, data DATE)")
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS Pessoa")
+        db.execSQL("DROP TABLE IF EXISTS Tarefa")
         onCreate(db)
     }
-    fun inserir(nome: String, idade: Int): Boolean {
+    fun inserir(titulo: String, descricao: String, prioridade: String, data: String): Boolean {
         val db = writableDatabase
         val valores = ContentValues().apply {
-            put("nome", nome)
-            put("idade", idade)
+            put("titulo", titulo)
+            put("descricao", descricao)
+            put("prioridade", prioridade)
+            put("data", data)
         }
-        return db.insert("Pessoa", null, valores) != -1L
+        return db.insert("Tarefa", null, valores) != -1L
     }
     fun listar(): List<String> {
         val lista = mutableListOf<String>()
         val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM Pessoa", null)
+        val cursor = db.rawQuery("SELECT * FROM Tarefa", null)
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
-                val nome = cursor.getString(cursor.getColumnIndexOrThrow("nome"))
-                val idade = cursor.getInt(cursor.getColumnIndexOrThrow("idade"))
-                lista.add("ID: $id - $nome ($idade anos)")
+                val titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"))
+                val descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"))
+                val prioridade = cursor.getString(cursor.getColumnIndexOrThrow("prioridade"))
+                val data = cursor.getString(cursor.getColumnIndexOrThrow("data"))
+                lista.add("ID: $id = Título: $titulo\nDescrição: $descricao\nPrioridade: $prioridade\nData para finalizar: $data")
             } while (cursor.moveToNext())
         }
         cursor.close()
         return lista
     }
-    fun atualizar(id: Int, novoNome: String, novaIdade: Int): Boolean {
+    fun atualizar(id: Int, novoTitulo: String, novaDescricao: String, novaPrioridade: String, novaData: String): Boolean {
         val db = writableDatabase
         val valores = ContentValues().apply {
-            put("nome", novoNome)
-            put("idade", novaIdade)
+            put("titulo", novoTitulo)
+            put("descricao", novaDescricao)
+            put("prioridade", novaPrioridade)
+            put("data", novaData)
         }
-        val linhasAfetadas = db.update("Pessoa", valores, "id = ?", arrayOf(id.toString()))
+        val linhasAfetadas = db.update("Tarefa", valores, "id = ?", arrayOf(id.toString()))
         return linhasAfetadas > 0
     }
     fun excluir(id: Int): Boolean {
         val db = writableDatabase
-        val linhasAfetadas = db.delete("Pessoa", "id = ?", arrayOf(id.toString()))
+        val linhasAfetadas = db.delete("Tarefa", "id = ?", arrayOf(id.toString()))
         return linhasAfetadas > 0
     }
 }

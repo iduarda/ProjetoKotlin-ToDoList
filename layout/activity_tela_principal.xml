@@ -107,5 +107,6 @@
         android:id="@+id/listaTarefas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#2b3c65"
         android:padding="5dp" />
 </LinearLayout>
