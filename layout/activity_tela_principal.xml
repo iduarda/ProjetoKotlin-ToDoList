@@ -5,17 +5,108 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#b2cbea"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#b2cbea"
-    android:padding="16dp" >
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textStyle="bold"
+        android:text="To-Do List"
         android:textSize="60dp"
-        android:text="TESTE" />
+        android:textColor="#2b3c65"
+        android:textStyle="bold"
+        android:shadowColor="#62c3a6"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="20"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="O que deseja fazer?"
+        android:textSize="35dp"
+        android:textColor="#2b3c65"
+        android:textStyle="bold"
+        android:shadowColor="#62c3a6"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="20"/>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#b2cbea"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/buttonInserir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inserir tarefa"
+            android:layout_margin="5dp"
+            android:backgroundTint="#fecb4d"
+            android:textColor="#2b3c65"
+            android:textSize="16dp"/>
+
+        <Button
+            android:id="@+id/buttonAtualizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Atualizar tarefa"
+            android:layout_margin="5dp"
+            android:backgroundTint="#fecb4d"
+            android:textColor="#2b3c65"
+            android:textSize="16dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#b2cbea"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/buttonExcluir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Excluir tarefa"
+            android:layout_margin="5dp"
+            android:backgroundTint="#fecb4d"
+            android:textColor="#2b3c65"
+            android:textSize="16dp"/> <!-- Espaço entre os botões -->
+
+        <Button
+            android:id="@+id/buttonExibir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exibir tarefas"
+            android:layout_margin="5dp"
+            android:backgroundTint="#fecb4d"
+            android:textColor="#2b3c65"
+            android:textSize="16dp"/> <!-- Espaço entre os botões -->
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listaTarefas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2b3c65"
+        android:padding="5dp" />
 </LinearLayout>

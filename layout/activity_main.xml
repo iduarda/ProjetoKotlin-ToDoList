@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#b2cbea"
-    android:padding="16dp" >
+    android:padding="25dp" >
 
     <ImageView
         android:id="@+id/imgLogo"
