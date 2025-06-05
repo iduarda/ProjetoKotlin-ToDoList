@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.chip.ChipGroup
+import android.media.MediaPlayer
 
 class InserirTarefa : AppCompatActivity() {
     private lateinit var db : ConexaoDB
@@ -74,8 +75,14 @@ class InserirTarefa : AppCompatActivity() {
 
             // Insere no banco
             val sucesso = db.inserir(titulo, descricao, prioridade, data)
+            val mediaPlayer = MediaPlayer.create(this, R.raw.caneta_escrevendo)
 
             if (sucesso) {
+                mediaPlayer.start()
+                mediaPlayer.setOnCompletionListener {
+                    it.release() // Libera o recurso após tocar
+                }
+
                 // Exibe o Toast com a mensagem de sucesso
                 Toast.makeText(this, "Tarefa adicionada com sucesso!", Toast.LENGTH_SHORT).show()
             } else {

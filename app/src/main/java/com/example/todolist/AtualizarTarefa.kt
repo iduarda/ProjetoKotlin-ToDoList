@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
@@ -98,7 +99,13 @@ class AtualizarTarefa : AppCompatActivity() {
             }
 
             val sucesso = db.atualizar(tarefaId, novoTitulo, novaDescricao, novaPrioridade, novaData)
+            val mediaPlayer = MediaPlayer.create(this, R.raw.caneta_escrevendo)
+
             if (sucesso) {
+                mediaPlayer.start()
+                mediaPlayer.setOnCompletionListener {
+                    it.release() // Libera o recurso após tocar
+                }
                 Toast.makeText(this, "Tarefa atualizada com sucesso!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Erro ao atualizar a tarefa.", Toast.LENGTH_SHORT).show()

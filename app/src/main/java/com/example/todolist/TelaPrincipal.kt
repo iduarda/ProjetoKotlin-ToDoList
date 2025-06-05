@@ -2,6 +2,7 @@ package com.example.todolist
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -79,6 +80,8 @@ class TelaPrincipal : AppCompatActivity() {
                 hint = "Digite o ID da tarefa"
             }
 
+            val mediaPLayer = MediaPlayer.create(this, R.raw.apagando)
+
             AlertDialog.Builder(this)
                 .setTitle("Excluir Tarefa")
                 .setMessage("Informe o ID da tarefa que deseja excluir:")
@@ -87,6 +90,10 @@ class TelaPrincipal : AppCompatActivity() {
                     val id = input.text.toString().toIntOrNull()
                     if (id != null) {
                         if (db.excluir(id)) {
+                            mediaPLayer.start()
+                            mediaPLayer.setOnCompletionListener {
+                                it.release() // Libera o recurso após tocar
+                            }
                             Toast.makeText(this, "Tarefa excluída com sucesso!", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this, "ID não encontrado.", Toast.LENGTH_SHORT).show()
